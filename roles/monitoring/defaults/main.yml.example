@@ -1,0 +1,4 @@
+gf_admin_user: your_user
+gf_admin_password: "your pass"
+tg_bot_token: "your tg bot token"
+tg_chat_id: your chat id
