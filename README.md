@@ -28,7 +28,7 @@
 
 ## Usage
 ```bash
-git clone
+git clone https://github.com/t44rbo/ansible-monitoring.git
 cp roles/monitoring/defaults/main.yml.example roles/monitoring/defaults/main.yml
 nano roles/monitoring/defaults/main.yml # fill in secrets
 nano inventory/hosts.ini # set your hosts and their username
