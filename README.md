@@ -35,6 +35,7 @@ nano inventory/hosts.ini # set your hosts and their username
 ansible-playbook -i inventory/hosts.ini site.yml 
 ```
 ## Project structure
+```
 ansible-monitoring/
 |-- README.md
 |-- inventory
@@ -52,3 +53,4 @@ ansible-monitoring/
 |       `-- tasks
 |           `-- main.yml
 `-- site.yml
+```
