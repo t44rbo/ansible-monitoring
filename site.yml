@@ -1,0 +1,12 @@
+---
+- name: Install docker role
+  hosts: My_VMs
+  become: true
+  roles:
+    - docker
+
+- name: Install monitoring role
+  hosts: My_VMs
+  become: false
+  roles:
+    - monitoring

@@ -1,0 +1,2 @@
+roles/monitoring/files/ansible_deploy_key
+roles/monitoring/defaults/main.yml

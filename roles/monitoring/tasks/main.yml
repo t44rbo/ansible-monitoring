@@ -1,0 +1,41 @@
+- name: Copy deploy key
+  copy:
+    src: ansible_deploy_key
+    dest: ~/.ssh/ansible_deploy_key
+    mode: "0600"
+
+- name: Add GitHub to ssh config
+  blockinfile:
+    path: ~/.ssh/config
+    block: |
+      Host github.com
+          IdentityFile ~/.ssh/ansible_deploy_key
+          User git
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - github"
+    create: true
+    mode: "0600"
+
+- name: Add GitHub to known_hosts
+  known_hosts:
+    name: github.com
+    key: "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
+    state: present
+
+- name: Clone or update repository
+  git:
+    repo: git@github.com:t44rbo/monitoring-stack.git
+    dest: ~/monitoring-stack
+
+- name: Add .env file
+  copy:
+    content: |
+      GF_ADMIN_USER={{ gf_admin_user }}
+      GF_ADMIN_PASSWORD={{ gf_admin_password }}
+      TG_BOT_TOKEN={{ tg_bot_token }}
+      TG_CHAT_ID={{ tg_chat_id }}
+    dest: ~/monitoring-stack/.env
+
+- name: Start monitoring stack
+  command:
+    cmd: docker compose up -d
+    chdir: ~/monitoring-stack
